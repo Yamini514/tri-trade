@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
+/* ============================================================
+   HeyFund Design System
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --background: #f5f2ec;
+  --background-alt: #eeeae0;
+  --surface: #ffffff;
+  --surface-2: #f9f7f3;
+
+  /* Brand */
+  --primary: #1a6b3c;
+  --primary-light: #e8f5ee;
+  --accent: #c9463b;
+  --accent-light: #fef0ef;
+  --gold: #b8962e;
+
+  /* Special hero red word */
+  --hero-red: #8b1a1a;
+
+  /* Text */
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-tertiary: #7a7a7a;
+
+  /* Lines */
+  --border: rgba(0, 0, 0, 0.08);
+
+  /* Shadows */
+  --shadow-card-val: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-medium-val: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-large-val: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
 @theme inline {
+  /* Color tokens -> Tailwind utilities (bg-*, text-*, border-*) */
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background-alt: var(--background-alt);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-gold: var(--gold);
+  --color-hero-red: var(--hero-red);
+
+  --color-ink: var(--text-primary);
+  --color-ink-2: var(--text-secondary);
+  --color-ink-3: var(--text-tertiary);
+
+  --color-line: var(--border);
+
+  /* Fonts */
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Radii */
+  --radius-card: 24px;
+  --radius-card-lg: 32px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  font-style: normal; /* Instrument Serif upright, never italic */
+}
+
+/* ---- Ticker tape marquee ---- */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-ticker {
+  animation: ticker-scroll 40s linear infinite;
+}
+
+/* ---- Live pulse dot ---- */
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 107, 60, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(26, 107, 60, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(26, 107, 60, 0);
+  }
+}
+.animate-live-pulse {
+  animation: live-pulse 2s infinite;
+}
+
+/* Shadow utility helpers */
+.shadow-card {
+  box-shadow: var(--shadow-card-val);
+}
+.shadow-medium {
+  box-shadow: var(--shadow-medium-val);
+}
+.shadow-large {
+  box-shadow: var(--shadow-large-val);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* hide scrollbar but allow scroll (mobile menus / carousels) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
