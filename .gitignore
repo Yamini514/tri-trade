@@ -38,8 +38,13 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
+# Ignore everything by default, but keep the non-secret, environment-specific
+# API URLs in source. Personal/secret overrides go in *.local and stay ignored.
 .env*
+.env.development
+.env.production
+!.env.example
 
 # vercel
 .vercel
