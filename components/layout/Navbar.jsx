@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/shared/Logo";
 
 const marketLinks = [
   { label: "Overview", href: "/markets" },
@@ -86,21 +87,17 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-white/95 backdrop-blur shadow-card border-b border-line"
-          : "bg-transparent",
-      )}
-    >
-      <nav className="container-wide flex h-[72px] items-center justify-between">
-        <Link
-          href="/"
-          className="font-serif text-3xl leading-none text-primary"
-        >
-          HeyFund
-        </Link>
+    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
+      <nav
+        className={cn(
+          // liquid-glass floating pill
+          "container-wide flex h-[64px] items-center justify-between rounded-full border px-3 pl-5 sm:pl-6 backdrop-blur-xl transition-all duration-300",
+          scrolled
+            ? "border-white/40 bg-white/60 shadow-large supports-[backdrop-filter]:bg-white/45"
+            : "border-white/30 bg-white/35 shadow-card supports-[backdrop-filter]:bg-white/25",
+        )}
+      >
+        <Logo />
 
         <div className="hidden items-center gap-7 lg:flex">
           <Dropdown label="Markets" links={marketLinks} />
@@ -145,9 +142,9 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.22 }}
-            className="lg:hidden border-t border-line bg-white"
+            className="lg:hidden container-wide mt-2 overflow-hidden rounded-3xl border border-white/40 bg-white/80 shadow-large backdrop-blur-xl"
           >
-            <div className="container-wide flex flex-col gap-1 py-4">
+            <div className="flex flex-col gap-1 p-4">
               <MobileGroup label="Markets" links={marketLinks} />
               <MobileGroup label="Learn" links={learnLinks} />
               <MobileLink href="/tools">Tools</MobileLink>

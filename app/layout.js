@@ -1,8 +1,5 @@
 import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { Analytics } from "@/components/Analytics";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,18 +22,20 @@ export const metadata = {
     "High-conviction intraday, options, and swing ideas for disciplined retail traders. Trade calls, education, and tools for the Indian stock market.",
 };
 
+/**
+ * Root layout — intentionally minimal. It only owns <html>/<body>, fonts, and
+ * global CSS. Chrome (navbar/footer) lives in the (marketing) route group, and
+ * the admin panel ships its own shell under /admin, so neither leaks into the
+ * other.
+ */
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
       className={`${inter.variable} ${instrumentSerif.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-ink">
-        <Analytics />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }

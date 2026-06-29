@@ -94,6 +94,30 @@ body {
   animation: ticker-scroll 40s linear infinite;
 }
 
+/* ---- Testimonials auto-scroll marquee ---- */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee-scroll var(--marquee-duration, 45s) linear infinite;
+  will-change: transform;
+}
+/* pause when the viewer hovers/focuses the track */
+.marquee-pause:hover .animate-marquee,
+.marquee-pause:focus-within .animate-marquee {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
 /* ---- Live pulse dot ---- */
 @keyframes live-pulse {
   0% {
@@ -135,4 +159,124 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ============================================================
+   Admin Dashboard Design System
+   ------------------------------------------------------------
+   Scoped, theme-aware tokens used only by the /admin panel. The
+   marketing tokens above are a fixed light "cream" theme; the admin
+   panel needs its own neutral palette with dark/light switching, so
+   it gets a distinct namespace (--admin-*) and registers Tailwind
+   color utilities (bg-admin-surface, text-admin-fg, ...) that flip
+   based on the [data-theme] attribute set on the panel root.
+   ============================================================ */
+
+/* Enables `dark:` utilities driven by [data-theme="dark"] (set by ThemeProvider). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --admin-bg: #f6f7f9;
+  --admin-surface: #ffffff;
+  --admin-surface-2: #f1f3f6;
+  --admin-elevated: #ffffff;
+  --admin-border: #e4e8ee;
+  --admin-fg: #0f1729;
+  --admin-fg-muted: #586273;
+  --admin-fg-subtle: #8a94a3;
+  --admin-primary: #1a6b3c;
+  --admin-primary-hover: #155730;
+  --admin-primary-fg: #ffffff;
+  --admin-primary-soft: #e8f5ee;
+  --admin-ring: rgba(26, 107, 60, 0.35);
+
+  --admin-success: #1a8f4c;
+  --admin-success-soft: #e6f6ec;
+  --admin-warning: #b8860b;
+  --admin-warning-soft: #fbf2da;
+  --admin-danger: #c9463b;
+  --admin-danger-soft: #fdeceb;
+  --admin-info: #2563a8;
+  --admin-info-soft: #e6effa;
+
+  --admin-shadow: 0 1px 2px rgba(16, 23, 41, 0.06), 0 4px 16px rgba(16, 23, 41, 0.05);
+}
+
+[data-theme="dark"] {
+  --admin-bg: #0a0e16;
+  --admin-surface: #121826;
+  --admin-surface-2: #1a2231;
+  --admin-elevated: #18202f;
+  --admin-border: #232d3f;
+  --admin-fg: #e7ebf2;
+  --admin-fg-muted: #9aa6b8;
+  --admin-fg-subtle: #69768a;
+  --admin-primary: #36c878;
+  --admin-primary-hover: #2bb56b;
+  --admin-primary-fg: #062012;
+  --admin-primary-soft: rgba(54, 200, 120, 0.12);
+  --admin-ring: rgba(54, 200, 120, 0.4);
+
+  --admin-success: #3ad17f;
+  --admin-success-soft: rgba(58, 209, 127, 0.12);
+  --admin-warning: #e0b84a;
+  --admin-warning-soft: rgba(224, 184, 74, 0.13);
+  --admin-danger: #f0685c;
+  --admin-danger-soft: rgba(240, 104, 92, 0.13);
+  --admin-info: #5aa0ec;
+  --admin-info-soft: rgba(90, 160, 236, 0.13);
+
+  --admin-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+@theme inline {
+  --color-admin-bg: var(--admin-bg);
+  --color-admin-surface: var(--admin-surface);
+  --color-admin-surface-2: var(--admin-surface-2);
+  --color-admin-elevated: var(--admin-elevated);
+  --color-admin-border: var(--admin-border);
+  --color-admin-fg: var(--admin-fg);
+  --color-admin-fg-muted: var(--admin-fg-muted);
+  --color-admin-fg-subtle: var(--admin-fg-subtle);
+  --color-admin-primary: var(--admin-primary);
+  --color-admin-primary-hover: var(--admin-primary-hover);
+  --color-admin-primary-fg: var(--admin-primary-fg);
+  --color-admin-primary-soft: var(--admin-primary-soft);
+  --color-admin-success: var(--admin-success);
+  --color-admin-success-soft: var(--admin-success-soft);
+  --color-admin-warning: var(--admin-warning);
+  --color-admin-warning-soft: var(--admin-warning-soft);
+  --color-admin-danger: var(--admin-danger);
+  --color-admin-danger-soft: var(--admin-danger-soft);
+  --color-admin-info: var(--admin-info);
+  --color-admin-info-soft: var(--admin-info-soft);
+}
+
+.admin-shadow {
+  box-shadow: var(--admin-shadow);
+}
+
+/* Subtle skeleton shimmer for loading states. */
+@keyframes admin-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.admin-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--admin-surface-2) 25%,
+    var(--admin-border) 37%,
+    var(--admin-surface-2) 63%
+  );
+  background-size: 200% 100%;
+  animation: admin-shimmer 1.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .admin-skeleton {
+    animation: none;
+  }
 }

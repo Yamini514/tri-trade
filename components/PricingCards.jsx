@@ -7,7 +7,7 @@ import { pricingPlans } from "@/lib/mock-data";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
-import { whatsappLink } from "@/lib/site";
+import { whatsappLink, TELEGRAM_LINK } from "@/lib/site";
 
 function BillingToggle({ annual, setAnnual }) {
   return (
@@ -45,9 +45,9 @@ function BillingToggle({ annual, setAnnual }) {
 function PlanCard({ plan, annual }) {
   const price = annual ? plan.annual : plan.monthly;
   const featured = plan.featured;
-  const billing =
-    price === 0 ? "" : ` (₹${price.toLocaleString("en-IN")}/mo${annual ? ", billed annually" : ""})`;
-  const waMessage = `Hi HeyFund, I'm interested in the ${plan.name} plan${billing}. Please share the next steps to get started.`;
+  const isFree = price === 0;
+  const waMessage = `Hi HeyFund Team,\n\nI'm interested in the ${plan.name} Plan.\n\nPlease share the payment details and the next steps to activate my membership.\n\nThanks!`;
+  const ctaHref = isFree ? TELEGRAM_LINK : whatsappLink(waMessage);
   return (
     <motion.div
       whileHover={{ y: -6 }}
@@ -118,7 +118,7 @@ function PlanCard({ plan, annual }) {
       </ul>
 
       <Button
-        href={whatsappLink(waMessage)}
+        href={ctaHref}
         variant={featured ? "white" : "dark"}
         size="md"
         className="mt-7 w-full"
