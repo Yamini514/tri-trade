@@ -125,7 +125,7 @@ export default function MarketsPage() {
         </div>
       </section>
 
-      <section className="bg-surface-2 py-16 md:py-20">
+      <section id="heatmap" className="scroll-mt-24 bg-surface-2 py-16 md:py-20">
         <div className="container-wide">
           <Reveal>
             <SectionLabel>Sector heatmap</SectionLabel>
@@ -139,7 +139,7 @@ export default function MarketsPage() {
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-20">
+      <section id="option-chain" className="scroll-mt-24 bg-background py-16 md:py-20">
         <div className="container-wide">
           <Reveal>
             <SectionLabel>Open interest · NIFTY weekly</SectionLabel>

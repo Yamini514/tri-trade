@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { SEBI_DISCLAIMER } from "@/lib/site";
 
 const container = {
   hidden: {},
@@ -16,6 +17,16 @@ const item = {
 export function Hero() {
   return (
     <section className="relative bg-background">
+      {/* SEBI compliance disclaimer */}
+      <div className="border-b border-line bg-surface-2/70">
+        <div className="container-wide py-2.5">
+          <p className="mx-auto flex max-w-4xl items-start justify-center gap-2 text-center text-[11px] leading-relaxed text-ink-3 sm:text-xs">
+            <ShieldCheck className="mt-px hidden h-3.5 w-3.5 shrink-0 sm:block" />
+            <span>{SEBI_DISCLAIMER}</span>
+          </p>
+        </div>
+      </div>
+
       <div className="container-wide flex flex-col items-center py-20 text-center md:py-28">
         <motion.div
           variants={container}

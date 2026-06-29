@@ -33,6 +33,22 @@ export function Button({
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
+    // External links (WhatsApp, tel, mailto, absolute URLs) render a plain
+    // anchor opening in a new tab — Next <Link> is only for in-app routes.
+    const isExternal = /^(https?:|wa\.me|tel:|mailto:)/.test(href);
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          className={classes}
+          target="_blank"
+          rel="noopener noreferrer"
+          {...props}
+        >
+          {children}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={classes} {...props}>
         {children}

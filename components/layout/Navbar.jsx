@@ -8,6 +8,12 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 
+const marketLinks = [
+  { label: "Overview", href: "/markets" },
+  { label: "Sector Heatmap", href: "/markets#heatmap" },
+  { label: "Option Chain", href: "/markets#option-chain" },
+];
+
 const learnLinks = [
   { label: "Courses", href: "/learn#courses" },
   { label: "Candlesticks", href: "/learn#candlesticks" },
@@ -97,12 +103,7 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
-          <Link
-            href="/markets"
-            className="text-sm font-medium text-ink-2 hover:text-ink transition-colors"
-          >
-            Markets
-          </Link>
+          <Dropdown label="Markets" links={marketLinks} />
           <Dropdown label="Learn" links={learnLinks} />
           <Link
             href="/tools"
@@ -147,7 +148,7 @@ export function Navbar() {
             className="lg:hidden border-t border-line bg-white"
           >
             <div className="container-wide flex flex-col gap-1 py-4">
-              <MobileLink href="/markets">Markets</MobileLink>
+              <MobileGroup label="Markets" links={marketLinks} />
               <MobileGroup label="Learn" links={learnLinks} />
               <MobileLink href="/tools">Tools</MobileLink>
               <MobileLink href="/pricing">Pricing</MobileLink>
